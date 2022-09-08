@@ -1,9 +1,9 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 
-import App from "components/App"
+import { App } from "view"
 
-import "assets/fonts.css"
+import "@fontsource/ubuntu"
 import "index.css"
 
 const root = document.getElementById("root") as HTMLElement

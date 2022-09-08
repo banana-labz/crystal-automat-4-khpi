@@ -1,20 +1,18 @@
 import React, { useState, useCallback, useEffect } from "react"
 
-import { FrameDurationInput } from "components/FrameDurationInput"
-import { CellSizeInput } from "components/CellSizeInput"
-import { Canvas } from "components/Canvas"
+import { FrameDurationInput } from "view/components/FrameDurationInput"
+import { CellSizeInput } from "view/components/CellSizeInput"
+import { Canvas } from "view/components/Canvas"
 
-import { FIELD_SIZE } from "const"
+import { createArray2D } from "logic/utils"
+import { next } from "logic/algorithm/crystal"
 
-import { createArray2D } from "utils"
-
-import { next } from "algorithm/crystal"
-import { PauseIcon } from "./PauseIcon"
+const FIELD_SIZE = 100
 
 const defaultFieldState = createArray2D(FIELD_SIZE, false)
 defaultFieldState[FIELD_SIZE / 2][FIELD_SIZE / 2] = true
 
-const App = () => {
+export const App = () => {
   const [pause, setPause] = useState(false)
   const [iteration, setIteration] = useState<number | null>(0)
   const [frameDuration, setFrameDuration] = useState<number | null>(1000)
@@ -70,5 +68,3 @@ const App = () => {
     </>
   )
 }
-
-export default App

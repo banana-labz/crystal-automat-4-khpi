@@ -1,4 +1,4 @@
-import { createArray2D, forEach } from "utils"
+import { createArray2D, forEach } from "logic/utils"
 
 const CRYSTAL_GROWTH_OPTIONS = [
   { oldState: false, neighbours: 1 },

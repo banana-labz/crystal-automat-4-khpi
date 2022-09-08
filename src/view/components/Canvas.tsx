@@ -1,8 +1,6 @@
 import React, { useEffect, useRef } from "react"
 
-import { colors } from "const"
-
-import { forEach } from "utils"
+import { forEach } from "logic/utils"
 
 interface CanvasProps {
   cells: boolean[][]
@@ -25,7 +23,7 @@ export const Canvas = ({ cells, cellWidth, cellHeight }: CanvasProps) => {
     }
 
     context.clearRect(0, 0, canvas.width, canvas.height)
-    context.fillStyle = colors.ACTIVE_CELL_COLOR
+    context.fillStyle = "#20E040"
 
     forEach(cells, (cellStatus, i, j) => {
       cellStatus && context.fillRect(
@@ -43,7 +41,7 @@ export const Canvas = ({ cells, cellWidth, cellHeight }: CanvasProps) => {
       ref={ref}
       width={cellWidth * cells.length}
       height={cellHeight * cells.length}
-      style={{ backgroundColor: colors.BACKGROUND_COLOR }}
+      style={{ backgroundColor: "#323232" }}
     />
   )
 }
