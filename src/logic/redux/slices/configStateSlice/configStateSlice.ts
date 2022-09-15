@@ -1,13 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 const configStateSlice = createSlice({
   name: "configState",
   initialState: {
     frameDuration: 6000 as number | undefined,
-    cellSize: 6,
+    cellSize: 3,
   },
   reducers: {
-    setFrameDuration: (state, { payload }) => {
+    setFrameDuration: (state, { payload }: PayloadAction<string>) => {
       const inputValue = payload.match(/\d+/)
       if (!inputValue) {
         state.frameDuration = undefined

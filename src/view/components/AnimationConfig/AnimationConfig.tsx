@@ -2,11 +2,11 @@ import React from "react"
 
 import { CellSizeInput } from "./CellSizeInput"
 import { FrameDurationInput } from "./FrameDurationInput"
-import { ConfigPanelContainer } from "./ConfigPanel.styled"
+import { AnimationConfigContainer } from "./AnimationConfig.styled"
 
-export const ConfigPanel = () => (
-  <ConfigPanelContainer>
+export const AnimationConfig = () => (
+  <AnimationConfigContainer>
     <CellSizeInput />
     <FrameDurationInput />
-  </ConfigPanelContainer>
+  </AnimationConfigContainer>
 )

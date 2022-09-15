@@ -7,7 +7,6 @@ import { useCanvas } from "view/hooks"
 
 import { CanvasStyled } from "./Canvas.styled"
 
-
 interface CanvasProps {
   iteration: number
   cells: boolean[][]

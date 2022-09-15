@@ -1,30 +1,30 @@
 import React from "react"
 
 import {
-  AutomatStatusPanelContainer,
+  AutomatStatusContainer,
   IterationIndicator,
   AutomatStatusButtons,
-} from "./AutomatStatusPanel.styled"
+} from "./AutomatStatus.styled"
 
-type AutomatStatusPanelProps = {
+type AutomatStatusProps = {
   iteration: number
   pause: boolean
   switchPause: () => void
   resetAutomat: () => void
 }
 
-export const AutomatStatusPanel = ({
+export const AutomatStatus = ({
   iteration,
   pause,
   switchPause,
   resetAutomat,
-}: AutomatStatusPanelProps) => (
-  <AutomatStatusPanelContainer>
+}: AutomatStatusProps) => (
+  <AutomatStatusContainer>
     <IterationIndicator>Iteration: {iteration}</IterationIndicator>
     <AutomatStatusButtons>
       <button onClick={resetAutomat}>Reset</button>
       {pause && <button onClick={switchPause}>Resume</button>}
       {!pause && <button onClick={switchPause}>Pause</button>}
     </AutomatStatusButtons>
-  </AutomatStatusPanelContainer>
+  </AutomatStatusContainer>
 )

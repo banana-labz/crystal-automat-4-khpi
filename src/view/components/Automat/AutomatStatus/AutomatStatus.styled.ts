@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const AutomatStatusPanelContainer = styled.div`
+export const AutomatStatusContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
