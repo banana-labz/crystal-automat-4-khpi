@@ -24,9 +24,8 @@ export const useFrameLoop = (
 
     setTimeout(() => {
       incrementIteration()
-    }, frameDuration)
-    
-    callback()
+      callback()
+    }, frameDuration)    
   }, [iteration, pause])
 
   return {
