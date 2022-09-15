@@ -27,7 +27,7 @@ export const useFrameLoop = (
     }, frameDuration)
     
     callback()
-  }, [iteration, pause, frameDuration])
+  }, [iteration, pause])
 
   return {
     pause: { pause, switchPause },

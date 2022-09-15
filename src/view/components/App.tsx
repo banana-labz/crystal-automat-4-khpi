@@ -1,37 +1,47 @@
-import React from "react"
+import React, { useCallback } from "react"
 import { useActions } from "react-redux-actions-hook"
 
 import { useAutomatState, useConfigState } from "logic/redux"
 import * as automatActions from "logic/redux/slices/automatStateSlice"
 
-import { CellSizeInput } from "view/components/CellSizeInput"
-import { FrameDurationInput } from "view/components/FrameDurationInput"
-import { Canvas } from "view/components/Canvas"
 import { useFrameLoop } from "view/hooks/useFrameLoop"
+
+import { Canvas } from "./Canvas"
+import { Layout } from "./Layout"
+import { ConfigPanel } from "./ConfigPanel"
+import { AutomatContainer } from "./AutomatContainer"
+import { AutomatStatusPanel } from "./AutomatStatusPanel"
 
 export const App = () => {
   const { cells } = useAutomatState()
   const { frameDuration, cellSize } = useConfigState()
-  const { growCrystal } = useActions(automatActions)
+  const { growCrystal, reset } = useActions(automatActions)
 
   const frameLoopData = useFrameLoop(growCrystal, frameDuration)
   const { iteration, setIteration } = frameLoopData.iteration
   const { pause, switchPause } = frameLoopData.pause
 
+  const resetAutomat = useCallback(() => {
+    reset()
+    setIteration(0)
+  }, [])
+
   return (
-    <>
-      <div className="config" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '8px', padding: '16px' }}>
-        <p>Iteration: {iteration}</p>
-        <CellSizeInput />
-        <FrameDurationInput />
-        {pause && <button onClick={switchPause}>Resume</button>}
-        {!pause && <button onClick={switchPause}>Pause</button>}
-      </div>
-      <Canvas
-        cellWidth={cellSize}
-        cellHeight={cellSize}
-        cells={cells}
-      />
-    </>
+    <Layout width={cells.length * cellSize}>
+      <ConfigPanel />
+      <AutomatContainer>
+        <AutomatStatusPanel
+          iteration={iteration}
+          pause={pause}
+          switchPause={switchPause}
+          resetAutomat={resetAutomat}
+        />
+        <Canvas
+          cells={cells}
+          iteration={iteration}
+          cellSize={cellSize}
+        />
+      </AutomatContainer>
+    </Layout>
   )
 }

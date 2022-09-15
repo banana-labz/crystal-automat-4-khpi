@@ -4,7 +4,7 @@ const configStateSlice = createSlice({
   name: "configState",
   initialState: {
     frameDuration: 6000 as number | undefined,
-    cellSize: 10,
+    cellSize: 6,
   },
   reducers: {
     setFrameDuration: (state, { payload }) => {
@@ -17,12 +17,18 @@ const configStateSlice = createSlice({
       state.frameDuration = +inputValue
     },
     incrementCellSize: (state) => {
+      if (state.cellSize > 30) {
+        return
+      }
+
       state.cellSize++
     },
     decrementCellSize: (state) => {
-      if (state.cellSize > 1) {
-        state.cellSize--
+      if (state.cellSize <= 1) {
+        return
       }
+
+      state.cellSize--
     },
   }
 })
