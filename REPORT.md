@@ -1,5 +1,5 @@
 Клітинний автомат: «Кристали»
 
 Приклади:
-![image.png](./image.png)
-![image-1.png](./image-1.png)
+![example-crystals-1.png](./example-crystals-1.png)
+![example-crystals-2.png](./example-crystals-2.png)
