@@ -9,7 +9,7 @@
 ![example-crystals-1.png](https://i.imgur.com/t7mKIkp.png)
 ![example-crystals-2.png](https://i.imgur.com/kDQMk03.png)
 
-### Додаткові можливості:
+### Додаткові можливості
 - Редагування початкових умов: правил, розміру поля.
 - Редагування масштабу
 - Редагування довжини кадру
