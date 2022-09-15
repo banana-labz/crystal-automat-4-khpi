@@ -20,7 +20,7 @@ export const FieldSizeInput = ({
     if (!str || !+str) {
       return
     }
-    setFieldSize(+str);
+    setFieldSize(+str)
   }, [])
 
   return (

@@ -45,7 +45,7 @@ const automatStateSlice = createSlice({
           const bit = binaryRepresentation.charAt(indexInByteRepresentation)
 
           return { oldState, neighbors, newState: bit === "1" }
-        });
+        })
 
         return [...allOptions, ...currentStateOptions]
       }, [])

@@ -15,7 +15,11 @@ export const FrameDurationInput = () => {
   const { setFrameDuration } = useActions(actions)
 
   const handleSetFrameDuration = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setFrameDuration(event.target.value);
+    const str = event.target.value.match(/\d+/)
+    if (!str) {
+      return
+    }
+    setFrameDuration(+str)
   }, [])
 
   return (
