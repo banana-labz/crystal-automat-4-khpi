@@ -1,64 +1,31 @@
-import React, { useState, useCallback, useEffect } from "react"
+import React from "react"
+import { useActions } from "react-redux-actions-hook"
 
-import { FrameDurationInput } from "view/components/FrameDurationInput"
+import { useAutomatState, useConfigState } from "logic/redux"
+import * as automatActions from "logic/redux/slices/automatStateSlice"
+
 import { CellSizeInput } from "view/components/CellSizeInput"
+import { FrameDurationInput } from "view/components/FrameDurationInput"
 import { Canvas } from "view/components/Canvas"
-
-import { createArray2D } from "logic/utils"
-import { next } from "logic/algorithm/crystal"
-
-const FIELD_SIZE = 100
-
-const defaultFieldState = createArray2D(FIELD_SIZE, false)
-defaultFieldState[FIELD_SIZE / 2][FIELD_SIZE / 2] = true
+import { useFrameLoop } from "view/hooks/useFrameLoop"
 
 export const App = () => {
-  const [pause, setPause] = useState(false)
-  const [iteration, setIteration] = useState<number | null>(0)
-  const [frameDuration, setFrameDuration] = useState<number | null>(1000)
-  const [cells, setCells] = useState<boolean[][]>(defaultFieldState)
+  const { cells } = useAutomatState()
+  const { frameDuration, cellSize } = useConfigState()
+  const { growCrystal } = useActions(automatActions)
 
-  const [cellSize, setCellSize] = useState<number>(8)
-
-  const incrementIteration = useCallback(() => setIteration(iteration => (iteration || 0) + 1), []);
-  const incrementCellSize = useCallback(() => setCellSize(scale => scale + 1), [])
-  const decrementCellSize = useCallback(() => setCellSize(scale => scale > 1 ? scale - 1 : scale), [])
-  const pauseIterations = useCallback(() => { setPause(true) }, [])
-  const resumeIteration = useCallback(() => {
-    setPause(false)
-    incrementIteration()
-  }, [])
-
-  useEffect(() => {
-    if (pause) {
-      return
-    }
-
-    setTimeout(() => {
-      if (!iteration) {
-        setIteration(1)
-        return
-      }
-      incrementIteration()
-    }, frameDuration || 1000)
-    setCells(next)
-  }, [iteration])
+  const frameLoopData = useFrameLoop(growCrystal, frameDuration)
+  const { iteration, setIteration } = frameLoopData.iteration
+  const { pause, switchPause } = frameLoopData.pause
 
   return (
     <>
       <div className="config" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '8px', padding: '16px' }}>
         <p>Iteration: {iteration}</p>
-        <CellSizeInput
-          cellSize={cellSize}
-          incrementCellSize={incrementCellSize}
-          decrementCellSize={decrementCellSize}
-        />
-        <FrameDurationInput
-          frameDuration={frameDuration}
-          setFrameDuration={setFrameDuration}
-        />
-        {pause && <button onClick={resumeIteration}>Resume</button>}
-        {!pause && <button onClick={pauseIterations}>Pause</button>}
+        <CellSizeInput />
+        <FrameDurationInput />
+        {pause && <button onClick={switchPause}>Resume</button>}
+        {!pause && <button onClick={switchPause}>Pause</button>}
       </div>
       <Canvas
         cellWidth={cellSize}

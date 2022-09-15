@@ -34,7 +34,7 @@ export const Canvas = ({ cells, cellWidth, cellHeight }: CanvasProps) => {
       )
     })
 
-  }, [cells])
+  }, [cells, cellWidth, cellHeight])
   
   return (
     <canvas
