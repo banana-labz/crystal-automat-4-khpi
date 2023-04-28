@@ -1,3 +1,3 @@
 export const metrics = {
-  text: "18px",
+    text: "18px",
 }

@@ -1,37 +1,34 @@
 import React, { useCallback } from "react"
+import { useSelector } from "react-redux"
 import { useActions } from "react-redux-actions-hook"
 
-import { useConfigState } from "logic/redux/hooks"
-import * as actions from "logic/redux/slices/configStateSlice"
+import { actions, selectors } from "store"
 
-import {
-  FrameDurationInputContainer,
-  FrameDurationInputComponent,
-  FrameDurationInputLabel,
-} from "./FrameDurationInput.styled"
+import { FrameDurationInputContainer, FrameDurationInputComponent, FrameDurationInputLabel } from "./FrameDurationInput.styled"
 
 export const FrameDurationInput = () => {
-  const { frameDuration } = useConfigState()
-  const { setFrameDuration } = useActions(actions)
+    const { frameDuration } = useSelector(selectors.config)
+    const { setFrameDuration } = useActions(actions.config)
 
-  const handleSetFrameDuration = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const str = event.target.value.match(/\d+/)
-    if (!str) {
-      return
-    }
-    setFrameDuration(+str)
-  }, [])
+    const handleSetFrameDuration = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+        const frameDuration = event.target.value.match(/\d+/)
+        if (!frameDuration) {
+            return
+        }
 
-  return (
-    <FrameDurationInputContainer>
-      <FrameDurationInputLabel>
-        Frame duration:
-      </FrameDurationInputLabel>
-      <FrameDurationInputComponent
-        placeholder="frame duration"
-        value={frameDuration || ""}
-        onChange={handleSetFrameDuration}
-      />
-    </FrameDurationInputContainer>
-  )
+        setFrameDuration(+frameDuration)
+    }, [])
+
+    return (
+        <FrameDurationInputContainer>
+            <FrameDurationInputLabel>
+                Frame duration:
+            </FrameDurationInputLabel>
+            <FrameDurationInputComponent
+                placeholder="frame duration"
+                value={frameDuration || ""}
+                onChange={handleSetFrameDuration}
+            />
+        </FrameDurationInputContainer>
+    )
 }

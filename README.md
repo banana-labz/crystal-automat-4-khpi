@@ -1,7 +1,17 @@
-Installation:
+## Клітинний автомат: «Кристали»
 
-```sh
-git clone https://gitlab.com/THXRION666/automat.git
-cd automat
-npm install
-```
+### Графічний інтерфейс
+
+![ui.png](https://i.imgur.com/RRCqWxc.png)
+
+### Приклади кристалів
+
+![example-crystals-1.png](https://i.imgur.com/t7mKIkp.png)
+![example-crystals-2.png](https://i.imgur.com/kDQMk03.png)
+
+### Додаткові можливості
+- Редагування початкових умов: «правил росту», розміру поля.
+- Редагування масштабу
+- Редагування довжини кадру
+- Можливість зберігати зображення (правда, це стандартний функціонал бравзера)
+- Повторний запуск та пауза

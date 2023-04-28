@@ -1,38 +1,32 @@
 import React, { useCallback } from "react"
 
-import {
-  FieldSizeInputContainer,
-  FieldSizeInputLabel,
-  FieldSizeInputComponent,
-} from "./FieldSizeInput.styled"
+import { FieldSizeInputContainer, FieldSizeInputLabel, FieldSizeInputComponent } from "./FieldSizeInput.styled"
 
 type FieldSizeInputProps = {
-  fieldSize: number
-  setFieldSize: (fieldSize: number) => void
+    fieldSize: number
+    setFieldSize: (fieldSize: number) => void
 }
 
-export const FieldSizeInput = ({
-  fieldSize,
-  setFieldSize,
-}: FieldSizeInputProps) => {
-  const handleSetFieldSize = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const str = event.target.value.slice(0, 4).match(/\d+/)
-    if (!str || !+str) {
-      return
-    }
-    setFieldSize(+str)
-  }, [])
+export const FieldSizeInput = ({ fieldSize, setFieldSize }: FieldSizeInputProps) => {
+    const handleSetFieldSize = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+        const fieldSize = event.target.value.slice(0, 4).match(/\d+/)
+        if (!fieldSize || !+fieldSize) {
+            return
+        }
 
-  return (
-    <FieldSizeInputContainer>
-      <FieldSizeInputLabel>
-        Field size:
-      </FieldSizeInputLabel>
-      <FieldSizeInputComponent
-        placeholder="200"
-        value={fieldSize}
-        onChange={handleSetFieldSize}
-      />
-    </FieldSizeInputContainer>
-  )
+        setFieldSize(+fieldSize)
+    }, [])
+
+    return (
+        <FieldSizeInputContainer>
+            <FieldSizeInputLabel>
+                Field size:
+            </FieldSizeInputLabel>
+            <FieldSizeInputComponent
+                placeholder="200"
+                value={fieldSize}
+                onChange={handleSetFieldSize}
+            />
+        </FieldSizeInputContainer>
+    )
 }
